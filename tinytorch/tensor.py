@@ -65,6 +65,9 @@ class Tensor(object):
             return op.sub([self, other])
         else:
             return op.rsub_by_const([self, other])
+    
+    def __neg__(self):
+        return self.__rsub__(0)
 
     def __mul__(self, other):
         if isinstance(other, Tensor):

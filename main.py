@@ -1,10 +1,7 @@
-from autograd import creator
+import tinytorch
+from tinytorch import functional as F
 
 
 if __name__ == "__main__":
-    x = creator.ones((2, 2))
-    y = x + 2
-    z = y * y * 3
-    out = z.mean()
-    out.backward()
-    print(x.grad)
+    x = F.sigmoid(tinytorch.Tensor(3))
+    print(x)

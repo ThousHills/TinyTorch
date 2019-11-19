@@ -139,7 +139,8 @@ class Sum(OP):
 
 class Mean(OP):
     def forward(self, from_tensors):
-
+        if not isinstance(from_tensors, List):
+            from_tensors = [from_tensors]
         return tensor.Tensor(
             sum(from_tensors) / from_tensors[0].data.size,
             from_tensors, self
@@ -152,6 +153,8 @@ class Mean(OP):
 
 class Exp(OP):
     def forward(self, from_tensors):
+        if not isinstance(from_tensors, List):
+            from_tensors = [from_tensors]
         return tensor.Tensor(np.exp(from_tensors[0].data), from_tensors, self)
 
     def backward(self, from_tensors, grad):
@@ -160,6 +163,8 @@ class Exp(OP):
 
 class Log(OP):
     def forward(self, from_tensors):
+        if not isinstance(from_tensors, List):
+            from_tensors = [from_tensors]
         return tensor.Tensor(np.log(from_tensors[0].data), from_tensors, self)
 
     def backward(self, from_tensors, grad):
