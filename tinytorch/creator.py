@@ -12,3 +12,10 @@ def ones(shape, dtype=None):
 
 def zeros(shape, dtype=None):
     return Tensor(np.zeros(shape, dtype))
+
+def rand(*dims):
+    return Tensor(np.random.rand(*dims))
+
+
+def randn(*dims):
+    return Tensor(np.random.randn(*dims))

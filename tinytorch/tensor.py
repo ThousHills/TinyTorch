@@ -65,7 +65,7 @@ class Tensor(object):
             return op.sub([self, other])
         else:
             return op.rsub_by_const([self, other])
-    
+
     def __neg__(self):
         return self.__rsub__(0)
 
@@ -89,6 +89,9 @@ class Tensor(object):
         else:
             return op.rdiv_by_const([self, other])
 
+    def matmul(self, other):
+        return op.matmul([self, other])
+
     def mean(self):
         return op.mean([self])
 
@@ -104,7 +107,14 @@ class Tensor(object):
     def __str__(self):
         # Backward function
         if self.op != None:
-            return f"Tensor({self.data.__str__()})" + \
-                f", grad_fn=<{self.op.__class__.__name__}Backward>"
+            return f"Tensor(\n{self.data.__str__()})" + \
+                f",\ngrad_fn=<{self.op.__class__.__name__}Backward>"
 
-        return f"Tensor({self.data.__str__()})"
+        return f"Tensor(\n{self.data.__str__()})"
+
+    @property
+    def shape(self):
+        return self.data.shape
+
+    def reshape(self, shape):
+        self.data = self.data.reshape(shape)

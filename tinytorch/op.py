@@ -14,7 +14,7 @@ class OP:
     def forward(self, from_tensors: List[Any]):
         """ 前向计算
 
-        :param form_tensors: 参与计算的数据
+        :param from_tensors: 参与计算的数据
         """
         raise NotImplementedError
 
@@ -81,10 +81,6 @@ class Mul(OP):
             from_tensors, self)
 
     def backward(self, from_tensors, grad):
-        r"""
-        $$  \frac{\paratixy}{x} =  y  \\
-            \frac{}{} = x   $$
-        """
         return [from_tensors[1].data * grad,
                 from_tensors[0].data * grad]
 
@@ -171,6 +167,16 @@ class Log(OP):
         return [grad / from_tensors[0].data]
 
 
+class MatMul(OP):
+    """ 矩阵乘法
+    """
+    def forward(self, from_tensors):
+
+        return tensor.Tensor(np.matmul(from_tensors[0].data, from_tensors[1].data), self)
+
+    def backward(self, from_tensors, grad):
+        return [grad*]
+
 # 基本运算符
 add = Add()
 add_by_const = AddByConst()
@@ -180,6 +186,7 @@ mul = Mul()
 mul_by_const = MulByConst()
 div = Div()
 rdiv_by_const = RDivByConst()
+matmul = MatMul()
 
 # 基本运算方法
 sum = Sum()
