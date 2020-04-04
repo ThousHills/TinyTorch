@@ -171,11 +171,12 @@ class MatMul(OP):
     """ 矩阵乘法
     """
     def forward(self, from_tensors):
-
-        return tensor.Tensor(np.matmul(from_tensors[0].data, from_tensors[1].data), self)
+        if not isinstance(from_tensors, List):
+            from_tensors = [from_tensors]
+        return tensor.Tensor(np.matmul(from_tensors[0].data, from_tensors[1].data), from_tensors, self)
 
     def backward(self, from_tensors, grad):
-        return [grad*]
+        return [np.matmul(grad, from_tensors[1].data.T), np.matmul(from_tensors[0].data.T, grad)]
 
 # 基本运算符
 add = Add()
