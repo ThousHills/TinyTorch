@@ -5,3 +5,6 @@ class Module(object):
 
     def backward(self):
         pass
+
+    def __call__(self, *args):
+        return self.forward(*args)

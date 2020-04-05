@@ -12,4 +12,4 @@ class Linear(Module):
         self.b = tinytorch.rand(1)
 
     def forward(self, x):
-        return x * self.W + self.b
+        return x.matmul(self.W) + self.b

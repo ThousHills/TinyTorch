@@ -12,14 +12,30 @@
 ```bash
 git clone https://github.com/Codle/TinyTorch
 cd TinyTorch
-pip install -e .
 ```
 
 ## 用法
 
 ```python
 import tinytorch as ttorch
+import tinytorch.nn as nn
+import tinytorch.functional as F
+
+
+class MLP(nn.Module):
+
+    def __init__(self, input_dim, hidden_dim, output_dim):
+        self.linear = nn.Linear(input_dim, hidden_dim)
+        self.relu = nn.ReLU()
+        self.output = nn.Linear(hidden_dim, output_dim)
+
+    def forward(self, x):
+        out = self.linear(x)
+        out = self.relu(out)
+        out = self.output(out)
+        out = F.sigmoid(out)
+        return out
 
 if __name__ == '__main__':
-    a = ttorch.ones((1, 1))
+    model = MLP(10, 5, 2)
 ```
