@@ -3,8 +3,7 @@
 """
 import numpy as np
 
-from . import utils
-from . import op
+from . import op, utils
 
 
 class Tensor(object):

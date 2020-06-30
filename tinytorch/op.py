@@ -1,6 +1,8 @@
-from . import tensor
+from typing import Any, List
+
 import numpy as np
-from typing import List, Any
+
+from . import tensor
 
 
 class OP:
@@ -170,6 +172,7 @@ class Log(OP):
 class MatMul(OP):
     """ 矩阵乘法
     """
+
     def forward(self, from_tensors):
         if not isinstance(from_tensors, List):
             from_tensors = [from_tensors]
@@ -177,6 +180,7 @@ class MatMul(OP):
 
     def backward(self, from_tensors, grad):
         return [np.matmul(grad, from_tensors[1].data.T), np.matmul(from_tensors[0].data.T, grad)]
+
 
 # 基本运算符
 add = Add()

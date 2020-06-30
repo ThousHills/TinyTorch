@@ -2,8 +2,9 @@
 
 用于快速创建零矩阵、全一矩阵等
 """
-from .tensor import Tensor
 import numpy as np
+
+from .tensor import Tensor
 
 
 def ones(shape, dtype=None):
@@ -12,6 +13,7 @@ def ones(shape, dtype=None):
 
 def zeros(shape, dtype=None):
     return Tensor(np.zeros(shape, dtype))
+
 
 def rand(*dims):
     return Tensor(np.random.rand(*dims))
