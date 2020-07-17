@@ -181,6 +181,16 @@ class MatMul(OP):
     def backward(self, from_tensors, grad):
         return [np.matmul(grad, from_tensors[1].data.T), np.matmul(from_tensors[0].data.T, grad)]
 
+class Max(OP):
+
+    def forward(self, from_tensors):
+        if not isinstance(from_tensors, List):
+            # TODO
+            ...
+    
+    def backward(self, from_tensors, grad):
+        return
+
 
 # 基本运算符
 add = Add()

@@ -10,8 +10,9 @@ class Linear(Module):
     """
 
     def __init__(self, input_dim, output_dim):
-        self.W = tinytorch.rand(input_dim, output_dim)
-        self.b = tinytorch.rand(1)
+        super().__init__()
+        self.parameters.append(tinytorch.rand(input_dim, output_dim))
+        self.parameters.append(tinytorch.rand(1))
 
     def forward(self, x):
-        return x.matmul(self.W) + self.b
+        return x.matmul(self.parameters[0]) + self.parameters[1]
