@@ -14,22 +14,22 @@ cd TinyTorch
 ## 用法
 
 ```python
-import tinytorch as ttorch
-import tinytorch.nn as nn
+import tinytorch
+import tinytorch.creator as creator
 import tinytorch.functional as F
+import tinytorch.nn as nn
 
 
 class MLP(nn.Module):
 
-    def __init__(self, input_dim, hidden_dim, output_dim):
-        self.linear = nn.Linear(input_dim, hidden_dim)
-        self.relu = nn.ReLU()
-        self.output = nn.Linear(hidden_dim, output_dim)
+    def __init__(self, h1, h2, h3):
+        self.linear1 = nn.Linear(h1, h2)
+        self.linear2 = nn.Linear(h2, h3)
 
     def forward(self, x):
-        out = self.linear(x)
-        out = self.relu(out)
-        out = self.output(out)
+        out = self.linear1(x)
+        out = F.tanh(out)
+        out = self.linear2(out)
         out = F.sigmoid(out)
         return out
 

@@ -18,7 +18,6 @@ class MLP(nn.Module):
         out = F.tanh(out)
         out = self.linear2(out)
         out = F.sigmoid(out)
-
         return out
 
 
